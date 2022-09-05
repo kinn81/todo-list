@@ -1,0 +1,39 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
+}
+
+button {
+    width: 80px;
+}
+
+fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    
+}
+
+fieldset div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 80%;
+}
+
+
+.styled-table {
+    padding-top: 30px;
+}
+
+.styled-table * {
+    border: 1px solid gray;
+}
+
+#table-container {
+    display: flex;
+    flex-direction: row;
+    border: solid 1px red;
+    
+}

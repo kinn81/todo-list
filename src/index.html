@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ToDo List (development)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <form action="" method="">
+    <fieldset>
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title">
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <input type="text" id="description">
+      </div>
+      <div>
+        <label for="project">Project Group:</label>
+        <input type="text" id="project">
+      </div>
+      <div>
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate">
+      </div>
+      <div>
+        <label for="priority">Priority:</label>
+        <input type="number" id="priority">
+      </div>
+      <div>
+        <label for="isComplete">Is Complete?</label>
+        <input type="boolean" id="isComplete">
+      </div>
+    </fieldset>
+    <button type="submit">Add ToDo</button>
+  </form>
+
+  <div id="table-container">
+    <div>
+      <table class="styled-table" id="projects-table">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="styled-table" id="tasks-table">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
