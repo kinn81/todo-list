@@ -46,22 +46,18 @@ class Project {
                 this.#tasks.push(task);
             }
         }
-
-
     }
 
     printTask() {
         console.log(this.#tasks);
     }
 
-    removeTask(task, taskArr) {
-        let index = this.#tasks.indexOf()
-
-        //Dont need to iterate everything. Need to replacce For Each with regular loop
-        this.#tasks.forEach(function callback(t, idx) {
-            if (task, taskArr.isEqual(t)) index = idx;
-        });
-        if (index > -1) this.#tasks.splice(index, 1);
+    removeTask(task) {      
+        for (let i = 0; i < this.#tasks.length; i++) {
+            if(this.#tasks[i].isEqual(task)) {
+                this.#tasks.splice(i, 1);                
+            }
+        }
     }
 
     getTasks(proj = "All") {

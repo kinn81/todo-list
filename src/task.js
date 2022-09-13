@@ -2,10 +2,10 @@ export { createTask };
 
 
 //This represents an individual TASK, which will be contained in a PROJECT LIST
-const createTask = (title, desc, project = "default", dueDate, priority = 1, isComplete = false) => {
+const createTask = (title, desc, project = "Default", dueDate, priority = 1, isComplete = false) => {
     let taskActions = {
         isEqual(o) {
-            if (JSON.stringify(this) === JSON.stringify(o)) {
+            if (JSON.stringify(this) == JSON.stringify(o)) {
                 return true;
             } else {
                 return false;
@@ -17,7 +17,7 @@ const createTask = (title, desc, project = "default", dueDate, priority = 1, isC
     task.desc = desc;
     task.project = project;
     task.dueDate = dueDate;
-    task.priority = priority;
+    task.priority = Number(priority);
     task.isComplete = isComplete;
 
     return task;

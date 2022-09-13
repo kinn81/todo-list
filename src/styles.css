@@ -1,39 +1,89 @@
-form {
-    display: flex;
-    flex-direction: column;
-    width: 10vw;
+body {
+    display: grid;
+    grid-template-rows: 10vh 90vh;
+}
+
+#header {
+    background-color: lightyellow;
+}
+
+#midContainer {
+    display: grid;
+    grid-template-columns: 10vw 90vw;
+}
+
+#menu {
+    display: grid;
+    grid-template-rows: 10% 80%;
+    background-color: rgb(240, 248, 250);
+}
+
+/* STYLE THE TASK LIST TABLE*/
+fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
 }
 
 button {
     width: 80px;
 }
 
-fieldset {
-    border: 0;
-    padding: 0;
-    margin: 0;
-    
+#tasksTable {
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    flex: 1 1 100%;
 }
 
-fieldset div {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 80%;
+#tasksTable thead tr {
+    background-color: #7192c9;
+    color: #ffffff;
 }
 
-
-.styled-table {
-    padding-top: 30px;
+#tasksTable th,
+#tasksTable td {
+    padding: 12px 15px;
+    text-align: center;   
 }
 
-.styled-table * {
-    border: 1px solid gray;
+#tasksTable tbody tr {
+    border-bottom: 1px solid #dddddd;
 }
 
-#table-container {
-    display: flex;
-    flex-direction: row;
-    border: solid 1px red;
-    
+#tasksTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
 }
+
+#tasksTable tbody tr:last-of-type {
+    border-bottom: 2px solid #7192c9;
+}
+
+/*STYLE THE LEFT MENU BAR*/
+#menu {
+    justify-content: center;
+}
+
+/* STYLE THE PROJECT LIST TABLE*/
+#projectsTable {
+    font-size: 1.2em;
+    font-family: sans-serif;   
+}
+
+#projectsTable:first-child tr:first-child td:first-child {
+    border-top: 1px solid grey;
+}
+
+#projectsTable td {
+    padding: 10px;
+    border-bottom: 1px solid grey;
+}
+
+#projectsTable td:hover {
+    background-color: rgb(235, 243, 245);
+}
+
+#projectsTable td:active {
+    background-color: rgb(245, 253, 255);
+}
+
