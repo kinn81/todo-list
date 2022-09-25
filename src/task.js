@@ -20,6 +20,8 @@ const createTask = (title, desc, project = "Default", dueDate, priority = 1, isC
     task.priority = Number(priority);
     task.isComplete = isComplete;
 
+    
+
     return task;
 }
 

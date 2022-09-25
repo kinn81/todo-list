@@ -73,4 +73,16 @@ class ProjectList {
             this.addProject(newProject);
         }
     }
+
+    updateTask(title, desc, project, dueDate, priority, isComplete, recordID) {
+        recordID = recordID.split("|");
+        const proj = this.getProjects(recordID[0]);
+        const task = proj.getTasks(recordID[1]);
+
+        task.title = title;
+        task.desc = desc;
+        task.dueDate = dueDate;
+        task.priority = priority;
+        task.isComplete = isComplete;
+    }
 }

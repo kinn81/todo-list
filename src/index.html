@@ -11,17 +11,20 @@
   <div id="header"></div>
   <div id="midContainer">
     <div id="menu">
-      <div></div>
-      <div>
-        <table id="projectsTable">
-          <thead>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+      <div id="menuContainer">
+        <div>
+          <p class="clickable" id="addTask">Add Task</p>
+        </div>
+        <div>
+          <table id="projectsTable">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-
     <div id="mainPage">
       <table id="tasksTable">
         <thead>
@@ -33,9 +36,38 @@
   </div>
 </body>
 
-
-
-
-
+<div id="overlay">
+  <form id="newTaskForm" action="" method="" onsubmit="submitForm(this);return false">
+    <fieldset>
+      <div class="formContainer">
+        <input type="text" id="title" required>
+        <label for="title">Title</label>
+      </div>
+      <div class="formContainer">
+        <input type="text" id="description" required>
+        <label for="description">Description</label>
+      </div>
+      <div class="formContainer">
+        <input type="text" id="project" required>
+        <label for="project">Project Group</label>
+      </div>
+      <div class="formContainer">
+        <input type="text" id="dueDate" required onfocus="(this.type='date')" onblur="this.type='text'">
+        <label for="dueDate">Due Date</label>
+      </div>
+      <div class="formContainer">
+        <input type="number" required id="priority">
+        <label for="priority">Priority</label>
+      </div>
+      <div class="formContainer">
+        <input type="boolean" required id="isComplete">
+        <label for="isComplete">Is Complete?</label>
+      </div>
+    </fieldset>
+    <button id="submitButton" type="submit">Add Task</button>
+    <input type="hidden" id="addOrUpdate">
+    <input type="hidden" id="recordID">
+  </form>
+</div>
 
 </html>

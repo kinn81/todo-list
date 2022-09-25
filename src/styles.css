@@ -1,21 +1,76 @@
+@font-face {
+    font-family: 'brush';
+    src: url('./CaveatBrush-Regular.ttf');
+}
+
+.hidden {
+    display: none;
+}
+
 body {
     display: grid;
     grid-template-rows: 10vh 90vh;
 }
 
-#header {
-    background-color: lightyellow;
-}
-
 #midContainer {
     display: grid;
-    grid-template-columns: 10vw 90vw;
+    grid-template-columns: 25vw 75vw;
 }
 
 #menu {
-    display: grid;
-    grid-template-rows: 10% 80%;
-    background-color: rgb(240, 248, 250);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#menu * {
+    padding: 0;
+    margin: 0;
+}
+
+#menuContainer {
+    display: flex;
+    flex-direction: column;
+    padding-right: 30px;
+    padding-top: 10px;
+
+}
+
+#menuContainer>div>p {
+    font-family: 'brush';
+    font-size: 1.6em;
+}
+
+/*STYLE THE CLICKABLE ITEMS ON LEFT MENU*/
+.clickable:hover {
+    background-color: rgb(225, 233, 235);
+}
+
+.clickable:active {
+    background-color: rgb(245, 253, 255);
+}
+
+/* STYLE THE PROJECT LIST TABLE*/
+#projectsTable {
+    font-size: 1.2em;
+    font-family: sans-serif;
+}
+
+#projectsTable:first-child tr:first-child td:first-child {
+    border-top: 1px solid grey;
+}
+
+#projectsTable td {
+    padding: 10px 0px 10px 0px;
+    border-bottom: 1px solid grey;
+}
+
+#projectsTable td:hover {
+    background-color: rgb(225, 233, 235);
+}
+
+#projectsTable td:active {
+    background-color: rgb(245, 253, 255);
 }
 
 /* STYLE THE TASK LIST TABLE*/
@@ -33,18 +88,21 @@ button {
     font-size: 0.9em;
     font-family: sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    flex: 1 1 100%;
 }
 
 #tasksTable thead tr {
-    background-color: #7192c9;
-    color: #ffffff;
+    background-color: rgb(170, 200, 258);
+    font-weight: bold;
 }
 
 #tasksTable th,
 #tasksTable td {
     padding: 12px 15px;
-    text-align: center;   
+    text-align: center;
+}
+
+#tasksTable th {
+    white-space: nowrap;
 }
 
 #tasksTable tbody tr {
@@ -56,34 +114,103 @@ button {
 }
 
 #tasksTable tbody tr:last-of-type {
-    border-bottom: 2px solid #7192c9;
+    border-bottom: 2px solid rgb(153, 186, 241);
+    ;
 }
 
-/*STYLE THE LEFT MENU BAR*/
-#menu {
-    justify-content: center;
+/*FORM MODAL*/
+#overlay {
+    display: none;
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-/* STYLE THE PROJECT LIST TABLE*/
-#projectsTable {
-    font-size: 1.2em;
-    font-family: sans-serif;   
+#newTaskForm {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    background: rgb(153, 186, 241);
+    font-size: 1.1em;
+    font-family: sans-serif;
+    font-weight: 500;
+    padding: 30px 10px 30px 10px;
+    height: 300px;
+    width: 250px;
+    transform: translate(-50%, -50%);
+    border: 1px solid grey;
+    border-radius: 10px;
 }
 
-#projectsTable:first-child tr:first-child td:first-child {
-    border-top: 1px solid grey;
+#newTaskForm button {
+    outline: none;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 20px;
+    ;
+    width: 80%;
+    align-self: center;
 }
 
-#projectsTable td {
-    padding: 10px;
-    border-bottom: 1px solid grey;
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 
-#projectsTable td:hover {
-    background-color: rgb(235, 243, 245);
+.formContainer {
+    position: relative;
+    width: 100%;
 }
 
-#projectsTable td:active {
-    background-color: rgb(245, 253, 255);
+#newTaskForm input {
+    border: none;
+    border-bottom: 1px solid white;
+    background: transparent;
+    width: 100%;
+    outline: none;
 }
 
+input[type=date] {
+    width: 100%;
+}
+
+input[type=date]::before {
+    content: "";
+}
+
+#newTaskForm label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    pointer-events: none;
+    transition: .5s;
+}
+
+
+
+#newTaskForm input:focus~label,
+#newTaskForm input:valid~label {
+    top: -20px;
+    left: 0;
+    font-size: 12px;
+}
+
+.blur {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    opacity: 0.6;
+}

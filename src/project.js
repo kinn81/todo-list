@@ -60,11 +60,11 @@ class Project {
         }
     }
 
-    getTasks(proj = "All") {
-        if (proj == "All") {
+    getTasks(index = "") {
+        if (index == "") {
             return this.#tasks;
         } else {
-
+            return  this.#tasks[index];
         }
     }
 
