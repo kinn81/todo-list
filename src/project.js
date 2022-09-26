@@ -52,19 +52,23 @@ class Project {
         console.log(this.#tasks);
     }
 
-    removeTask(task) {      
-        for (let i = 0; i < this.#tasks.length; i++) {
-            if(this.#tasks[i].isEqual(task)) {
-                this.#tasks.splice(i, 1);                
+    removeTask(task) {
+        if (typeof task == 'number') {
+            this.#tasks.splice(task, 1);
+        } else {
+            for (let i = 0; i < this.#tasks.length; i++) {
+                if (this.#tasks[i].isEqual(task)) {
+                    this.#tasks.splice(i, 1);
+                }
             }
         }
     }
 
     getTasks(index = "") {
-        if (index == "") {
+        if (index === "") {
             return this.#tasks;
         } else {
-            return  this.#tasks[index];
+            return this.#tasks[index];
         }
     }
 

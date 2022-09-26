@@ -58,8 +58,9 @@ class ProjectList {
     deleteProject(project) {
     }
 
-    deleteTask(task) {
-        this.getProjects(task.project).removeTask(task);
+    deleteTask(recordID) {
+        recordID = recordID.split("|");
+        this.getProjects(recordID[0]).removeTask(Number(recordID[1]));
     }
 
     addTask(title, desc, project = "Default", dueDate, priority = 1, isComplete = false) {
@@ -76,9 +77,8 @@ class ProjectList {
 
     updateTask(title, desc, project, dueDate, priority, isComplete, recordID) {
         recordID = recordID.split("|");
-        const proj = this.getProjects(recordID[0]);
-        const task = proj.getTasks(recordID[1]);
-
+        let task = this.getProjects(recordID[0]).getTasks(Number(recordID[1]));
+        
         task.title = title;
         task.desc = desc;
         task.dueDate = dueDate;
