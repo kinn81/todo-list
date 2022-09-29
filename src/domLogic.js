@@ -11,6 +11,7 @@ class DomManager {
         this.#projects = projects
         this.#selectedProject = 'All';
         this.addEventListeners();
+        this.#columnOrder = [[]];
     }
 
     renderProjectTable() {
@@ -30,7 +31,7 @@ class DomManager {
             tableHead.appendChild(newRow);
 
             //Add 'All' project
-            addProj('All'); 
+            addProj('All');
 
             //Add projects
             this.#projects.getProjectNames().forEach(proj => {
@@ -105,14 +106,18 @@ class DomManager {
         let headings = ['Title', 'Description', 'Project Group', 'Due Date', 'Priority', 'Is Complete?', 'Edit', 'Delete', 'id'];
         newRow = document.createElement('tr');
         tableHead.appendChild(newRow);
+        let x = 0;
         headings.forEach(h => {
             newCell = document.createElement('td');
             newText = document.createTextNode(h);
             newCell.appendChild(newText);
+            newCell.dataset.id = x;
+            newCell.addEventListener('click', self.sortTable)
             newRow.appendChild(newCell);
             if (h == 'id') {
                 newCell.className = 'hidden';
             }
+            x++;
         });
 
         //If its an array of projects, loop over them adding each one, else just add single project
@@ -203,6 +208,52 @@ class DomManager {
         document.getElementById('newTaskForm').reset();
         document.getElementById('overlay').style.display = 'none';
         document.getElementById('midContainer').classList.remove('blur');
+    }
+
+    sortTableOld(e) {
+        let table = document.getElementById('tasksTable');
+        let column = e.target.dataset.id
+        let direction = 'asc';
+
+        let contSwitching = true;
+        let rows;
+        let shouldSwitch;
+        let row1, row2;
+        let i, j;
+        let x, y;
+
+        while (contSwitching) {
+            rows = table.rows;
+
+            contSwitching = false;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                x = rows[i].getElementsByTagName("TD")[column].textContent;
+                y = rows[i + 1].getElementsByTagName("TD")[column].textContent;
+                if (direction == 'asc' ? (x > y) : (x < y)) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    contSwitching = true;
+                }
+            }
+        }
+    }
+
+    sortTable(e) {
+        // Helper functions
+        const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+        const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+            v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+        )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+        //Get the table and the table body
+        const table = e.target.closest('table');
+        const body = table.getElementsByTagName('tbody')[0];
+
+        //Do the sorting
+        Array.from(table.getElementsByTagName('tbody')[0].querySelectorAll('tr'))
+            .sort(comparer(e.target.dataset.id, this.asc = !this.asc))
+            .forEach(tr => body.append(tr));
     }
 }
 
