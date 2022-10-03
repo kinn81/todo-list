@@ -1,5 +1,6 @@
 export { DomManager };
 import { isArray, update } from 'lodash';
+import {compareAsc} from 'date-fns'
 
 
 class DomManager {
@@ -112,6 +113,7 @@ class DomManager {
             newText = document.createTextNode(h);
             newCell.appendChild(newText);
             newCell.dataset.id = x;
+            newCell.dataset.text = h;
             newCell.addEventListener('click', self.sortTable)
             newRow.appendChild(newCell);
             if (h == 'id') {
@@ -210,50 +212,39 @@ class DomManager {
         document.getElementById('midContainer').classList.remove('blur');
     }
 
-    sortTableOld(e) {
-        let table = document.getElementById('tasksTable');
-        let column = e.target.dataset.id
-        let direction = 'asc';
-
-        let contSwitching = true;
-        let rows;
-        let shouldSwitch;
-        let row1, row2;
-        let i, j;
-        let x, y;
-
-        while (contSwitching) {
-            rows = table.rows;
-
-            contSwitching = false;
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                x = rows[i].getElementsByTagName("TD")[column].textContent;
-                y = rows[i + 1].getElementsByTagName("TD")[column].textContent;
-                if (direction == 'asc' ? (x > y) : (x < y)) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    contSwitching = true;
-                }
-            }
-        }
-    }
-
     sortTable(e) {
+        //Reset the other columns sorts
+        for(let i = 0; i < e.target.parentElement.childNodes.length; i++) {
+            if(i== e.target.dataset.id) continue;
+            e.target.parentElement.childNodes[i].innerText = e.target.parentElement.childNodes[i].dataset.text;
+        }
+        
         // Helper functions
         const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-
-        const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-            v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-        )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+        
+        var comparer = function (idx, asc) {
+            return function (a, b) {
+                return function (v1, v2) {
+                    if(idx == 3) {
+                        return compareAsc(new Date(v1), new Date(v2));
+                    } else return (v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2))
+                        ? v1 - v2
+                        : v1.toString().localeCompare(v2);
+                }(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+            }
+        };
 
         //Get the table and the table body
         const table = e.target.closest('table');
         const body = table.getElementsByTagName('tbody')[0];
-
+        
+        e.target.innerText = e.target.dataset.text + '\u2193';
+        this.asc ? e.target.innerText = e.target.dataset.text + '\u2191' : e.target.dataset.text + '\u2193';
+        
         //Do the sorting
-        Array.from(table.getElementsByTagName('tbody')[0].querySelectorAll('tr'))
+        Array.from(body.querySelectorAll('tr'))
             .sort(comparer(e.target.dataset.id, this.asc = !this.asc))
-            .forEach(tr => body.append(tr));
+            .forEach(tr => body.append(tr));   
     }
 }
 
