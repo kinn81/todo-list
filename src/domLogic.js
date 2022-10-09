@@ -88,6 +88,7 @@ class DomManager {
                 self.#projects.addTask(this.title.value, this.description.value, this.project.value, this.dueDate.value, this.priority.value, this.isComplete.value);
             }
             self.renderTaskTable();
+            self.renderProjectTable();
             self.resetForm();
         });
     }
