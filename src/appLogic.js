@@ -1,5 +1,3 @@
-export { createToDo, ToDoContainer };
-
 const createToDo = (title, desc, project = "default", dueDate, priority = 1, isComplete = false) => {
     let toDoActions = {
         isEqual(o) {
@@ -78,13 +76,5 @@ class ToDoContainer {
             if (projects.indexOf(t.project) == -1) projects.push(t.project);
         });
         return projects;
-    }
-}
-
-class ProjectContainer {
-    #projects;
-
-    constructor() {
-        this.#projects = [];
     }
 }

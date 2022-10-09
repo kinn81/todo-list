@@ -4,9 +4,7 @@ const path = require('path');
 module.exports = {
     mode: 'development',
   entry: {
-    index: './src/index.js',
-    domLogic: './src/domLogic.js',
-    appLogic: './src/appLogic.js',
+    index: './src/index.js'
   },
   devtool: 'inline-source-map',
   plugins: [

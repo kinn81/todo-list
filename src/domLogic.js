@@ -223,6 +223,7 @@ class DomManager {
         const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
         
         var comparer = function (idx, asc) {
+            //This is used
             return function (a, b) {
                 return function (v1, v2) {
                     if(idx == 3) {
