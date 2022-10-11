@@ -3,6 +3,15 @@
     src: url('./CaveatBrush-Regular.ttf');
 }
 
+#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: 'brush';
+    font-size: 4em;
+}
+
 .hidden {
     display: none;
 }
